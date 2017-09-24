@@ -11,7 +11,7 @@ SRC_URI="https://github.com/wxWidgets/wxWidgets/releases/download/v${PV}/${P}.ta
 
 LICENSE="wxWindows Library Licence"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE=""
 
 #${S} = ${FILESDIR}/${MY_PV}

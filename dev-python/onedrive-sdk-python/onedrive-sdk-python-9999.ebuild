@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7 python3_6 )
+PYTHON_COMPAT=( python3_{4,5,6} )
 inherit distutils-r1
 inherit git-r3
 
@@ -14,8 +14,8 @@ SRC_URI=""
 EGIT_REPO_URI="https://github.com/OneDrive/onedrive-sdk-python"
 
 LICENSE="MIT"
-SLOT="0"
-KEYWORDS="~amd64 ~x86"
+SLOT="9999"
+KEYWORDS=""
 IUSE=""
 
 DEPEND=">=dev-python/requests-2.6.1"

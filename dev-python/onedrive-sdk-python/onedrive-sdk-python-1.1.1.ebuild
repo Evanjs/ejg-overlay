@@ -3,14 +3,14 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7 python3_6 )
+PYTHON_COMPAT=( python3_{4,5,6} )
 inherit distutils-r1
 
-DESCRIPTION="OneDrive SDK for Python!"
-HOMEPAGE="https://dev.onedrive.com/"
+DESCRIPTION=""
+HOMEPAGE=""
 SRC_URI="https://github.com/OneDrive/${PN}/archive/${PV}.tar.gz"
 
-LICENSE="MIT"
+LICENSE=""
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""

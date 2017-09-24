@@ -7,7 +7,7 @@ DESCRIPTION="A Microsoft OneDrive client for Linux, written in Python3."
 HOMEPAGE="https://github.com/xybu/onedrived-dev"
 SRC_URI=""
 
-PYTHON_COMPAT=( python3_{4,5,6} )
+PYTHON_COMPAT=( python3_6 )
 
 inherit git-r3
 inherit distutils-r1
