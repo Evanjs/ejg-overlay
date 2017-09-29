@@ -14,7 +14,7 @@ SRC_URI=""
 EGIT_REPO_URI="https://github.com/OneDrive/onedrive-sdk-python"
 
 LICENSE="MIT"
-SLOT="9999"
+SLOT="0"
 KEYWORDS=""
 IUSE=""
 
