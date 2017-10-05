@@ -64,7 +64,6 @@ pkg_postinst() {
 }
 
 pkg_postrm() {
-	#rm libcurl-gnutls.so.4
 	xdg_pkg_postrm
 	gnome2_icon_cache_update
 }
