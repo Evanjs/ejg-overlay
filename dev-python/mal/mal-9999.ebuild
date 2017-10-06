@@ -13,7 +13,7 @@ SRC_URI=""
 EGIT_REPO_URI="https://github.com/ryukinix/mal"
 
 LICENSE="GPL-3"
-SLOT="9999"
+SLOT="0"
 KEYWORDS=""
 IUSE=""
 
