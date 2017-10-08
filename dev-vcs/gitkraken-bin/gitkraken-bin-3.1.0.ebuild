@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-inherit eutils gnome2-utils xdg toolchain-funcs
+inherit eutils gnome2-utils xdg
 DESCRIPTION="The downright luxurious Git client,for Windows, Mac & Linux"
 HOMEPAGE="https://www.gitkraken.com"
 SRC_URI="https://release.gitkraken.com/linux/v${PV}.tar.gz -> ${P}.tar.gz"
