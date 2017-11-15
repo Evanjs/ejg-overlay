@@ -7,7 +7,7 @@ DESCRIPTION="1Password Command Line Interface"
 HOMEPAGE="https://1password.com/"
 SRC_URI="https://cache.agilebits.com/dist/1P/op/pkg/v0.1.1/op_linux_amd64_v0.1.1.zip"
 
-LICENSE=""
+LICENSE="all-rights-reserved"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
