@@ -19,7 +19,7 @@ EGIT_REPO_URI="https://github.com/garglk/garglk.git"
 
 LICENSE="BSD GPL-2 MIT Hugo Glulxe"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE=""
 
 RDEPEND="
