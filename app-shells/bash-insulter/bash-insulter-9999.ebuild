@@ -19,6 +19,11 @@ IUSE=""
 DEPEND=""
 RDEPEND="${DEPEND}"
 
+src_prepare() {
+	eapply_user
+	default
+}
+
 src_install() {
 	insinto /etc/
 	doins src/bash.command-not-found
