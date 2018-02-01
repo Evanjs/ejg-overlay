@@ -14,7 +14,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="+c java"
 
-DEPEND="dev-ml/opam
+DEPEND=">=dev-lang/ocaml-4.05.0
+dev-ml/opam
 dev-lang/python
 virtual/pkgconfig
 c? ( || ( sys-devel/gcc sys-devel/llvm ) )
