@@ -1,5 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
-# Distributed under the terms of the GNU General Public License v2
+
 
 EAPI=6
 
@@ -15,7 +14,7 @@ SRC_URI="https://downloads.slack-edge.com/linux_releases/${MY_PN}-desktop-${PV}-
 LICENSE="all-rights-reserved"
 SLOT="0"
 KEYWORDS="~amd64 -*"
-IUSE="pax_kernel"
+IUSE="pax_kernel dark_theme"
 RESTRICT="bindist mirror"
 
 RDEPEND="app-crypt/libsecret:0[${MULTILIB_USEDEP}]
@@ -59,8 +58,12 @@ S="${WORKDIR}"
 
 src_prepare() {
 	default
-	cat ${FILESDIR}/slack-bin-dark-theme >> ${WORKDIR%/}/usr/lib/${MY_PN}/resources/app.asar.unpacked/src/static/ssb-interop.js
-	cat ${FILESDIR}/slack-bin-dark-theme >> ${WORKDIR%/}/usr/lib/${MY_PN}/resources/app.asar.unpacked/src/static/index.js
+
+	if use dark_theme ; then
+		# apply dark theme "patch"
+		cat ${FILESDIR}/slack-bin-dark-theme >> ${WORKDIR%/}/usr/lib/${MY_PN}/resources/app.asar.unpacked/src/static/ssb-interop.js
+		cat ${FILESDIR}/slack-bin-dark-theme >> ${WORKDIR%/}/usr/lib/${MY_PN}/resources/app.asar.unpacked/src/static/index.js
+	fi
 }
 
 src_install() {
