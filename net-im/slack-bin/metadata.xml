@@ -17,6 +17,7 @@
 	</longdescription>
 	<use>
 		<flag name="pax_kernel">Triggers a paxmarking of the binary</flag>
+		<flag name="dark_theme">Enable custom dark theme</flag>
 	</use>
 	<upstream>
 		<doc>https://get.slack.help/hc/en-us</doc>
