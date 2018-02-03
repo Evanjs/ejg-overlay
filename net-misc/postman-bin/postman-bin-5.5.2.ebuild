@@ -8,9 +8,7 @@ inherit eutils
 
 DESCRIPTION=""
 HOMEPAGE=""
-SRC_URI="https://dl.pstmn.io/download/version/${PV}/linux64 -> ${P}.tar.gz
-	x86?	( https://dl.pstmn.io/download/version/${PV}/linux32 -> ${P}.tar.gz )"
-
+SRC_URI="https://dl.pstmn.io/download/version/${PV}/linux64 -> ${P}.tar.gz"
 KEYWORDS="~amd64"
 LICENSE="MPL-2.0"
 SLOT="0"
