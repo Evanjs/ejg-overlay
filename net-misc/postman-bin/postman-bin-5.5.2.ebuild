@@ -4,6 +4,8 @@
 EAPI=6
 MY_PN=${PN/-bin/}
 
+inherit eutils
+
 DESCRIPTION=""
 HOMEPAGE=""
 SRC_URI="https://dl.pstmn.io/download/version/${PV}/linux64 -> ${P}.tar.gz
