@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit git-r3 cmake-utils
+inherit git-r3 cmake-utils multilib
 
 DESCRIPTION="A Microsoft project for cloud-based client-server communication in native code using a modern asynchronous C++ API design."
 HOMEPAGE="https://github.com/Microsoft/cpprestsdk"
@@ -26,3 +26,10 @@ dev-util/cmake"
 RDEPEND="${DEPEND}"
 
 CMAKE_USE_DIR="${S}/Release"
+
+src_install() {
+        cmake-utils_src_install
+		
+		# Do not violate multilib strict
+		mv "${ED}/usr/lib" "${ED}/usr/$(get_libdir)" || die "mv failed"
+}
