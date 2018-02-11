@@ -14,7 +14,7 @@ EGIT_REPO_URI="https://github.com/Microsoft/cpprestsdk.git"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS=""
-IUSE="-debug"
+IUSE="debug"
 
 DEPEND="sys-devel/gcc
 dev-vcs/git
