@@ -1,0 +1,413 @@
+From c62f26393c7f32e4cd6273e7aa8a909d4a6459e1 Mon Sep 17 00:00:00 2001
+From: "Evan.Stoll" <evan.stoll@rjginc.com>
+Date: Wed, 14 Feb 2018 19:27:51 -0500
+Subject: [PATCH] Replace c compat stubs with normal booleans
+
+---
+ KeyboardVisualizerCommon/AsusAuraSDK.cpp |  8 ++++----
+ KeyboardVisualizerCommon/AsusAuraSDK.h   |  2 +-
+ KeyboardVisualizerCommon/CmKeyboard.cpp  |  2 +-
+ KeyboardVisualizerCommon/CorsairCUE.cpp  | 12 ++++++------
+ KeyboardVisualizerCommon/LEDStrip.cpp    | 18 +++++++++---------
+ KeyboardVisualizerCommon/LEDStrip.h      |  6 +++---
+ KeyboardVisualizerCommon/LogitechSDK.cpp | 12 ++++++------
+ KeyboardVisualizerCommon/RazerChroma.cpp |  4 ++--
+ KeyboardVisualizerCommon/Visualizer.cpp  | 18 +++++++++---------
+ KeyboardVisualizerCommon/net_port.cpp    |  2 +-
+ KeyboardVisualizerCommon/serial_port.cpp | 10 +++++-----
+ KeyboardVisualizerVC/main.cpp            | 16 ++++++++--------
+ 12 files changed, 55 insertions(+), 55 deletions(-)
+
+diff --git a/KeyboardVisualizerCommon/AsusAuraSDK.cpp b/KeyboardVisualizerCommon/AsusAuraSDK.cpp
+index 48fcbe9..a246e35 100644
+--- a/KeyboardVisualizerCommon/AsusAuraSDK.cpp
++++ b/KeyboardVisualizerCommon/AsusAuraSDK.cpp
+@@ -38,7 +38,7 @@ void AsusAuraSDK::Initialize()
+ 
+     if (hModule)
+     {
+-        dllLoaded = TRUE;
++        dllLoaded = true;
+         (FARPROC&)EnumerateMbController = GetProcAddress(hModule, "EnumerateMbController");
+         (FARPROC&)SetMbMode = GetProcAddress(hModule, "SetMbMode");
+         (FARPROC&)SetMbColor = GetProcAddress(hModule, "SetMbColor");
+@@ -76,7 +76,7 @@ void AsusAuraSDK::Initialize()
+     }
+     else
+     {
+-        dllLoaded = FALSE;
++        dllLoaded = false;
+     }
+ }
+ 
+@@ -122,10 +122,10 @@ bool AsusAuraSDK::SetLEDs(COLORREF pixels[64][256])
+ 
+         SetDramColor(dram_LightCtrl[0], dram_color, dram_ledCount * 3);
+ #endif
+-        return TRUE;
++        return true;
+     }
+     else
+     {
+-        return FALSE;
++        return false;
+     }
+ }
+diff --git a/KeyboardVisualizerCommon/AsusAuraSDK.h b/KeyboardVisualizerCommon/AsusAuraSDK.h
+index 1da7d4b..3368233 100644
+--- a/KeyboardVisualizerCommon/AsusAuraSDK.h
++++ b/KeyboardVisualizerCommon/AsusAuraSDK.h
+@@ -23,7 +23,7 @@ private:
+     
+     HMODULE hModule = NULL;
+ 
+-    bool dllLoaded = FALSE;
++    bool dllLoaded = false;
+ 
+     EnumerateMbControllerFunc EnumerateMbController;
+     SetMbModeFunc SetMbMode;
+diff --git a/KeyboardVisualizerCommon/CmKeyboard.cpp b/KeyboardVisualizerCommon/CmKeyboard.cpp
+index 73f937e..6196b44 100644
+--- a/KeyboardVisualizerCommon/CmKeyboard.cpp
++++ b/KeyboardVisualizerCommon/CmKeyboard.cpp
+@@ -115,6 +115,6 @@ bool CmKeyboard::SetLEDs(COLORREF pixels[64][256])
+ 
+ 	return INITED;
+ #else
+-    return FALSE;
++    return false;
+ #endif
+ }
+\ No newline at end of file
+diff --git a/KeyboardVisualizerCommon/CorsairCUE.cpp b/KeyboardVisualizerCommon/CorsairCUE.cpp
+index 645f62e..7fffd1e 100644
+--- a/KeyboardVisualizerCommon/CorsairCUE.cpp
++++ b/KeyboardVisualizerCommon/CorsairCUE.cpp
+@@ -59,11 +59,11 @@ void CorsairCUE::Initialize()
+     CorsairPerformProtocolHandshake();
+     if (const auto error = CorsairGetLastError())
+     {
+-        failed = TRUE;
++        failed = true;
+     }
+     else
+     {
+-        failed = FALSE;
++        failed = false;
+ 
+         positions = CorsairGetLedPositions();
+ 
+@@ -82,10 +82,10 @@ void CorsairCUE::Initialize()
+             y_idx[i] = (int)(ROW_IDX_SPECTROGRAPH_TOP + (SPECTROGRAPH_ROWS * (positions->pLedPosition[i].top / height)) + (0.5f * (SPECTROGRAPH_ROWS / height)));
+         }
+ 
+-        failed = FALSE;
++        failed = false;
+     }
+ #else
+-    failed = TRUE;
++    failed = true;
+ #endif
+ }
+ 
+@@ -93,7 +93,7 @@ bool CorsairCUE::SetLEDs(COLORREF pixels[64][256])
+ {
+     if (failed)
+     {
+-        return FALSE;
++        return false;
+     }
+     else
+     {
+@@ -108,7 +108,7 @@ bool CorsairCUE::SetLEDs(COLORREF pixels[64][256])
+         }
+ 
+         CorsairSetLedsColors(positions->numberOfLed, colors);
+-        return TRUE;
++        return true;
+ #endif
+     }
+ }
+\ No newline at end of file
+diff --git a/KeyboardVisualizerCommon/LEDStrip.cpp b/KeyboardVisualizerCommon/LEDStrip.cpp
+index 13d3632..ce31ba7 100644
+--- a/KeyboardVisualizerCommon/LEDStrip.cpp
++++ b/KeyboardVisualizerCommon/LEDStrip.cpp
+@@ -25,9 +25,9 @@ void LEDStrip::Initialize(char* ledstring, int matrix_size, int matrix_pos, int
+     strcpy(led_string, ledstring);
+ 
+     //Assume serial device unless a different protocol is specified
+-    bool    serial      = TRUE;
+-    bool	udp	        = FALSE;
+-    bool    espurna	    = FALSE;
++    bool    serial      = true;
++    bool	udp	        = false;
++    bool    espurna	    = false;
+     LPSTR   numleds     = NULL;
+     LPSTR   source      = NULL;
+     LPSTR   udpport_baud= NULL;
+@@ -40,18 +40,18 @@ void LEDStrip::Initialize(char* ledstring, int matrix_size, int matrix_pos, int
+     if (strncmp(source, "udp:", 4) == 0)
+     {
+         source  = source + 4;
+-        serial  = FALSE;
+-        udp     = TRUE;
+-        espurna = FALSE;
++        serial  = false;
++        udp     = true;
++        espurna = false;
+     }
+ 
+     //Check if we are setting up an Espurna protocol device
+     if (strncmp(source, "espurna:", 8) == 0)
+     {
+         source  = source + 8;
+-        serial  = FALSE;
+-        udp     = FALSE;
+-        espurna = TRUE;
++        serial  = false;
++        udp     = false;
++        espurna = true;
+     }
+ 
+     //Check for either the UDP port or the serial baud rate
+diff --git a/KeyboardVisualizerCommon/LEDStrip.h b/KeyboardVisualizerCommon/LEDStrip.h
+index 4596042..f3c71f6 100644
+--- a/KeyboardVisualizerCommon/LEDStrip.h
++++ b/KeyboardVisualizerCommon/LEDStrip.h
+@@ -12,9 +12,9 @@
+ 
+ #include "VisualizerDefines.h"
+ 
+-#ifndef TRUE
+-#define TRUE true
+-#define FALSE false
++#ifndef true
++#define true true
++#define false false
+ #endif
+ 
+ class LEDStrip
+diff --git a/KeyboardVisualizerCommon/LogitechSDK.cpp b/KeyboardVisualizerCommon/LogitechSDK.cpp
+index e3b0473..d2781e1 100644
+--- a/KeyboardVisualizerCommon/LogitechSDK.cpp
++++ b/KeyboardVisualizerCommon/LogitechSDK.cpp
+@@ -60,7 +60,7 @@ bool LogitechSDK::SetLEDs(COLORREF pixels[64][256])
+ {
+     if (failed)
+     {
+-        return FALSE;
++        return false;
+     }
+     else
+     {
+@@ -77,8 +77,8 @@ bool LogitechSDK::SetLEDs(COLORREF pixels[64][256])
+         LogiLedSetTargetDevice(LOGI_DEVICETYPE_PERKEY_RGB);
+         if (!LogiLedSetLightingFromBitmap(LogitechBitmap))
+         {
+-            failed = TRUE;
+-            return FALSE;
++            failed = true;
++            return false;
+         }
+ 
+         COLORREF single_color = pixels[ROW_IDX_SINGLE_COLOR][0];
+@@ -86,10 +86,10 @@ bool LogitechSDK::SetLEDs(COLORREF pixels[64][256])
+         LogiLedSetTargetDevice(LOGI_DEVICETYPE_RGB | LOGI_DEVICETYPE_MONOCHROME);
+         if (!LogiLedSetLighting(GetRValue(single_color) / 2.55f, GetGValue(single_color) / 2.55f, GetBValue(single_color) / 2.55f))
+         {
+-            failed = TRUE;
+-            return FALSE;
++            failed = true;
++            return false;
+         }
+ 
+-        return TRUE;
++        return true;
+     }
+ }
+\ No newline at end of file
+diff --git a/KeyboardVisualizerCommon/RazerChroma.cpp b/KeyboardVisualizerCommon/RazerChroma.cpp
+index 4b38729..b4e635a 100644
+--- a/KeyboardVisualizerCommon/RazerChroma.cpp
++++ b/KeyboardVisualizerCommon/RazerChroma.cpp
+@@ -312,7 +312,7 @@ bool RazerChroma::SetLEDs(COLORREF pixels[64][256])
+ 
+     if (CreateEffect == NULL || pixels == NULL)
+     {
+-        return FALSE;
++        return false;
+     }
+     else
+     {
+@@ -512,6 +512,6 @@ bool RazerChroma::SetLEDs(COLORREF pixels[64][256])
+         
+         CreateEffect(ChromaSDK::CHROMABOX, ChromaSDK::CHROMA_CUSTOM, &ChromaBoxEffect, NULL);
+ 
+-        return TRUE;
++        return true;
+     }
+ };
+\ No newline at end of file
+diff --git a/KeyboardVisualizerCommon/Visualizer.cpp b/KeyboardVisualizerCommon/Visualizer.cpp
+index e939dd7..1b80df5 100644
+--- a/KeyboardVisualizerCommon/Visualizer.cpp
++++ b/KeyboardVisualizerCommon/Visualizer.cpp
+@@ -641,9 +641,9 @@ void Visualizer::SaveSettings()
+     char out_str[1024];
+ 
+     //Check background flags, they both should not be set
+-    if ((silent_bkgd == TRUE) && (reactive_bkgd == TRUE))
++    if ((silent_bkgd == true) && (reactive_bkgd == true))
+     {
+-        silent_bkgd = FALSE;
++        silent_bkgd = false;
+     }
+ 
+     //Get file path in executable directory
+@@ -1041,7 +1041,7 @@ void Visualizer::Update()
+ 
+ void Visualizer::StartThread()
+ {
+-    //Set application running flag to TRUE before starting threads
++    //Set application running flag to true before starting threads
+     running = true;
+ 
+ #ifdef WIN32
+@@ -1075,8 +1075,8 @@ void Visualizer::StartThread()
+ 
+ void Visualizer::Shutdown()
+ {
+-    //Initialize a fade-out by setting shutdown flag to TRUE and resetting timer
+-    shutdown_flag = TRUE;
++    //Initialize a fade-out by setting shutdown flag to true and resetting timer
++    shutdown_flag = true;
+     background_timer = 0;
+ 
+     //Wait for fade-out to complete before returning
+@@ -1481,12 +1481,12 @@ void Visualizer::NetUpdateThread()
+                     SetNormalization(nrml_ofst, nrml_scl);
+ 
+                     //Check background flags, they both should not be set
+-                    if ((silent_bkgd == TRUE) && (reactive_bkgd == TRUE))
++                    if ((silent_bkgd == true) && (reactive_bkgd == true))
+                     {
+-                        silent_bkgd = FALSE;
++                        silent_bkgd = false;
+                     }
+ 
+-                    update_ui = TRUE;
++                    update_ui = true;
+                 }
+             }
+             else
+@@ -1824,7 +1824,7 @@ void Visualizer::LEDStripUpdateThread()
+ {
+     if (str.size() > 0 || xmas.size() > 0 || huePlus.size() > 0)
+     {
+-        while (TRUE)
++        while (true)
+         {
+             for (unsigned int i = 0; i < str.size(); i++)
+             {
+diff --git a/KeyboardVisualizerCommon/net_port.cpp b/KeyboardVisualizerCommon/net_port.cpp
+index d5b5082..e56b316 100644
+--- a/KeyboardVisualizerCommon/net_port.cpp
++++ b/KeyboardVisualizerCommon/net_port.cpp
+@@ -233,7 +233,7 @@ void net_port::tcp_server_listen()
+ void net_port::tcp_close()
+ {
+     closesocket(sock);
+-    connected = FALSE;
++    connected = false;
+ }
+ 
+ int net_port::tcp_listen(char * recv_data, int length)
+diff --git a/KeyboardVisualizerCommon/serial_port.cpp b/KeyboardVisualizerCommon/serial_port.cpp
+index d4eb7da..e1b904a 100644
+--- a/KeyboardVisualizerCommon/serial_port.cpp
++++ b/KeyboardVisualizerCommon/serial_port.cpp
+@@ -56,12 +56,12 @@ bool serial_port::serial_open()
+     dcb.ByteSize = 8;                           //8 data bits
+     dcb.Parity = NOPARITY;                      //Parity = none
+     dcb.StopBits = ONESTOPBIT;                  //One stop bit
+-    dcb.fAbortOnError = TRUE;                   //Abort on error
+-    dcb.fOutX = FALSE;                          //XON/XOFF off for transmit
+-    dcb.fInX = FALSE;                           //XON/XOFF off for receive
+-    dcb.fOutxCtsFlow = FALSE;                   //Turn off CTS flow control
++    dcb.fAbortOnError = true;                   //Abort on error
++    dcb.fOutX = false;                          //XON/XOFF off for transmit
++    dcb.fInX = false;                           //XON/XOFF off for receive
++    dcb.fOutxCtsFlow = false;                   //Turn off CTS flow control
+     dcb.fRtsControl = RTS_CONTROL_DISABLE;      //Options DISABLE, ENABLE, HANDSHAKE
+-    dcb.fOutxDsrFlow = FALSE;                   //Turn off DSR flow control
++    dcb.fOutxDsrFlow = false;                   //Turn off DSR flow control
+     dcb.fDtrControl = DTR_CONTROL_DISABLE;      //Disable DTR control
+ 
+     SetCommState(file_descriptor, &dcb);
+diff --git a/KeyboardVisualizerVC/main.cpp b/KeyboardVisualizerVC/main.cpp
+index ca26126..ee7d03c 100644
+--- a/KeyboardVisualizerVC/main.cpp
++++ b/KeyboardVisualizerVC/main.cpp
+@@ -22,7 +22,7 @@ void parse_argument_string(char * argument, char * value)
+ {
+     if (strcmp(argument, "startminimized") == 0)
+     {
+-        startminimized = TRUE;
++        startminimized = true;
+     }
+ 
+     if (strcmp(argument, "amplitude") == 0)
+@@ -185,9 +185,9 @@ void parse_argument_string(char * argument, char * value)
+     {
+         vis.reactive_bkgd = atoi(value);
+ 
+-        if ((vis.silent_bkgd == TRUE) && (vis.reactive_bkgd == TRUE))
++        if ((vis.silent_bkgd == true) && (vis.reactive_bkgd == true))
+         {
+-            vis.silent_bkgd = FALSE;
++            vis.silent_bkgd = false;
+         }
+     }
+ 
+@@ -195,9 +195,9 @@ void parse_argument_string(char * argument, char * value)
+     {
+         vis.silent_bkgd = atoi(value);
+ 
+-        if ((vis.silent_bkgd == TRUE) && (vis.reactive_bkgd == TRUE))
++        if ((vis.silent_bkgd == true) && (vis.reactive_bkgd == true))
+         {
+-            vis.reactive_bkgd = FALSE;
++            vis.reactive_bkgd = false;
+         }
+     }
+ 
+@@ -349,14 +349,14 @@ boolean parse_command_line(char * command_line)
+             printf("                      - 1:  Bar graph per single strip\r\n");
+             printf("                      - 2:  Bar graph stretched across 2 strips each\r\n");
+             printf("                      - 3:  Bar graph stretched across all 4 strips\r\n");
+-            return FALSE;
++            return false;
+         }
+ 
+         parse_argument_string(argument, value);
+ 
+         value = strtok_s(next, " ", &next);
+     }
+-    return TRUE;
++    return true;
+ }
+ 
+ 
+@@ -402,7 +402,7 @@ int APIENTRY _tWinMain(HINSTANCE hInst, HINSTANCE h0, LPTSTR lpCmdLine, int nCmd
+ 	afxCurrentResourceHandle = hInst;
+ 	app.m_hInstance = hInst;
+ 
+-    startminimized = FALSE;
++    startminimized = false;
+ 
+     //Initialize Visualizer
+     vis.Initialize();
+-- 
+2.13.6
+
