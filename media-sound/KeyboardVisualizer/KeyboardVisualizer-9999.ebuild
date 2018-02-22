@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit git-r3 qmake-utils
+inherit git-r3 qmake-utils eutils
 
 DESCRIPTION="Razer Chroma, Corsair RGB, and other RGB peripherals spectrograph visualizer for Windows and Linux"
 HOMEPAGE=""
@@ -20,6 +20,11 @@ DEPEND="media-libs/openal
 		dev-libs/hidapi
 		dev-qt/qt-creator"
 RDEPEND="${DEPEND}"
+
+src_prepare() {
+	epatch "${FILESDIR}"/${P}-c-compat-bools.patch
+	default
+}
 
 
 src_compile() {
