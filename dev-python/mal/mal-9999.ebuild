@@ -17,7 +17,7 @@ SLOT="0"
 KEYWORDS=""
 IUSE=""
 
-DEPEND="=dev-python/decorating-0.5.2
+DEPEND=">=dev-python/decorating-0.6.1
         >=dev-python/appdirs-1.4.3
         >=dev-python/requests-2.18.1"
 RDEPEND="${DEPEND}"
