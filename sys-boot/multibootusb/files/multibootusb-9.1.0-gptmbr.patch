@@ -1,0 +1,11 @@
+diff -Naur multibootusb-9.1.0.orig/setup.py multibootusb-9.1.0/setup.py
+--- multibootusb-9.1.0.orig/setup.py	2018-01-03 14:11:00.000000000 -0500
++++ multibootusb-9.1.0/setup.py	2018-02-24 16:45:52.474378577 -0500
+@@ -63,6 +63,7 @@
+     data_files=[("/usr/share/applications", ["data/multibootusb.desktop"]),
+                 ('/usr/share/pixmaps', ["data/tools/multibootusb.png"]),
+                 ('/usr/share/polkit-1/actions/', ['org.debian.pkexec.run-multibootusb.policy']),
++                ('/usr/share/multibootusb/data/tools', ["data/tools/gptmbr.bin"]),
+                 ('/usr/share/multibootusb/data/tools', ["data/tools/mbr.bin"]),
+                 ('/usr/share/multibootusb/data', ["data/version.txt"]),
+                 ('/usr/share/multibootusb/data/tools', ["data/tools/multibootusb.png"]),

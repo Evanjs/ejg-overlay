@@ -36,3 +36,7 @@ RDEPEND="${DEPEND}
 	app-arch/p7zip
 	sys-fs/udisks:2
 "
+
+PATCHES=(
+"${FILESDIR}"/${P}-gptmbr.patch
+)
