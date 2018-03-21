@@ -58,7 +58,7 @@ src_install(){
 	doicon -s 128 "$FILESDIR"/ico/128.png
 	doicon -s 256 "$FILESDIR"/ico/256.png
 	doicon -s 512 "$FILESDIR"/ico/512.png
-	make_desktop_entry ${MY_PN} Messenger "messenger" Network Chat
+	make_desktop_entry Messenger Messenger "messenger" Network Chat
 }
 
 pkg_preinst() {
