@@ -6,9 +6,10 @@ MY_PN=${PN/-bin/}
 
 inherit eutils
 
-DESCRIPTION=""
-HOMEPAGE=""
+DESCRIPTION="Supercharge your API workflow"
+HOMEPAGE="https://www.getpostman.com/"
 SRC_URI="https://dl.pstmn.io/download/version/${PV}/linux64 -> ${P}.tar.gz"
+
 KEYWORDS="~amd64"
 LICENSE="MPL-2.0"
 SLOT="0"
