@@ -3,7 +3,7 @@
 
 EAPI=5
 
-inherit eutils toolchain-funcs git-2
+inherit autotools eutils toolchain-funcs git-2
 
 DESCRIPTION="Simple screen locker"
 HOMEPAGE="https://github.com/Arcaena/i3lock-color"
@@ -38,6 +38,7 @@ src_prepare() {
 	popd
 	sed -i -e '/MANDIR/d' Makefile.am || die
 	epatch_user
+	eautoreconf
 }
 
 src_install() {

@@ -26,12 +26,15 @@ DOCS=( README.md )
 
 src_prepare() {
 	path=/usr/share/${PN}
-	sed -ie "s:SCRIPTPATH=.*:SCRIPTPATH=${path}:" lock || die
+	sed -i "s:scriptpath=.*:scriptpath=${path}:" lock || die
 	epatch_user
 }
 
 src_install() {
 	newbin lock ${PN}
-	insinto /usr/share/${PN}
+	insinto /usr/share/${PN}/icons
+	doins icons/circlelock{,dark}.png 
+	doins icons/circlelockclear{,dark}.png
 	doins icons/lock{,dark}.png
+	doins icons/token{,dark}.png
 }
