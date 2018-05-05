@@ -10,10 +10,12 @@ DESCRIPTION="Color palettes for Python"
 HOMEPAGE="https://jiffyclub.github.io/palettable/"
 SRC_URI="https://github.com/jiffyclub/palettable/archive/v${PV}.tar.gz"
 
-LICENSE=""
+LICENSE="palettable"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND=""
 RDEPEND="${DEPEND}"
+
+# TODO: tests - needs mock, etc
