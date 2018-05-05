@@ -26,3 +26,7 @@ DEPEND=">=dev-python/hypothesis-3.56.5
 >=dev-python/more-itertools-4.1.0"
 
 RDEPEND="${DEPEND}"
+
+python_test() {
+	py.test -v || die
+}
