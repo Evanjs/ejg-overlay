@@ -20,3 +20,7 @@ DEPEND=""
 RDEPEND="${DEPEND}
 >=dev-python/matplotlib-2.0.0
 >=dev-python/pycodestyle-2.3.1"
+
+python_test() {
+	py.test -v
+}
