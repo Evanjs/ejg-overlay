@@ -4,7 +4,7 @@
 EAPI=6
 
 PYTHON_COMPAT=( python2_7 python3_6 )
-inherit distutils-r1
+inherit distutils-r1 git-r3
 
 DESCRIPTION="Visualization Package for NetworkX"
 HOMEPAGE="http://nxviz.readthedocs.io/"
