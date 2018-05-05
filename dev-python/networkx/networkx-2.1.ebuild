@@ -43,13 +43,11 @@ RDEPEND="
 		dev-python/pyyaml[${PYTHON_USEDEP}]
 	)"
 
-PATCHES=(
-	"${FILESDIR}"/1.11-sphinx-pngmath.patch
-)
+S=${WORKDIR}/${PN}-${P}
 
 python_prepare_all() {
 	# Avoid d'loading of file objects.inv from 2 sites of python docs
-	sed -e "s/'sphinx.ext.intersphinx', //" -i doc/source/conf.py || die
+	sed -e "s/'sphinx.ext.intersphinx', //" -i doc/conf.py || die
 	distutils-r1_python_prepare_all
 }
 
