@@ -20,7 +20,7 @@ DEPEND=">=dev-python/hypothesis-3.56.5
 >=dev-python/pandas-0.22.0
 >=dev-python/matplotlib-2.2.2
 >=dev-python/palettable-3.1.0
->=dev-python/numpy-1.14.3
+>=dev-python/numpy-1.13.3
 >=dev-python/pyyaml-3.12
 >=dev-python/seaborn-0.8.1
 >=dev-python/more-itertools-4.1.0"
