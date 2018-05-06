@@ -4,7 +4,7 @@
 EAPI=6
 
 PYTHON_COMPAT=( python3_6 )
-inherit distutils-r1 git-r3
+inherit git-r3
 
 DESCRIPTION="For PyCon, PyData, ODSC, and beyond!"
 HOMEPAGE="http://ericmjl.github.io/Network-Analysis-Made-Simple"
@@ -16,7 +16,10 @@ SLOT="0"
 KEYWORDS=""
 IUSE=""
 
-DEPEND="dev-python/matplotlib
+
+DEPEND="app-text/pandoc"
+RDEPEND="${RDEPEND}
+dev-python/matplotlib
 dev-python/networkx
 dev-python/pandas
 dev-python/hiveplot
@@ -24,4 +27,16 @@ dev-python/nxviz
 dev-python/jupyter
 sci-libs/scipy
 dev-python/python-louvain"
-RDEPEND="${DEPEND}"
+
+src_compile() {
+	echo ""
+}
+
+src_install() {
+	echo ""
+}
+
+pkg_postinst() {
+	echo "All requirements for network-analysis-made-simple have been installed."
+	echo "Please clone the repository from https://github.com/ericmjl/Network-Analysis-Made-Simple.git to a directory of your choice"
+}
