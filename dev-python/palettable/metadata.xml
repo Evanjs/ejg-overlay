@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="project">
+		<email>python@gentoo.org</email>
+	</maintainer>
+	<maintainer type="person">
+		<email>evanjsx@gmail.com</email>
+	</maintainer>
+	<longdescription lang="en">
+		Palettable (formerly brewer2mpl) is a library of color palettes for Python. It's written in pure Python with no dependencies, but it can supply color maps for matplotlib. You can use Palettable to customize matplotlib plots or supply colors for a web application.
+	</longdescription>
+</pkgmetadata>
