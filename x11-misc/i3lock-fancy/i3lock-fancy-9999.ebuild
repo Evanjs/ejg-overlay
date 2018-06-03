@@ -3,17 +3,16 @@
 
 EAPI=5
 
-inherit eutils toolchain-funcs git-2
+inherit eutils toolchain-funcs git-r3
 
 DESCRIPTION="Simple screen locker"
 HOMEPAGE="https://github.com/meskarune/i3lock-fancy"
 EGIT_REPO_URI="https://github.com/meskarune/i3lock-fancy.git"
-EGIT_BRANCH=master
 
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE=""
+IUSE="multi_monitor"
 
 MY_PN=i3lock
 
@@ -23,6 +22,10 @@ RDEPEND="media-gfx/imagemagick[png]
 	x11-misc/i3lock-color"
 DEPEND=""
 DOCS=( README.md )
+
+pkg_setup() {
+	use multi_monitor && EGIT_BRANCH=dualmonitors
+}
 
 src_prepare() {
 	path=/usr/share/${PN}

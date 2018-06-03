@@ -1,0 +1,5 @@
+*i3lock-fancy-9999 (24 Aug 2016)
+
+  24 Aug 2016; Naohiro Aota <naota@gentoo.org> +i3lock-fancy-9999.ebuild,
+  +metadata.xml:
+  x11-misc/i3lock-fancy: new package
