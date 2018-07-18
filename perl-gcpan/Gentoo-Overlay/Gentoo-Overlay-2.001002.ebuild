@@ -30,4 +30,5 @@ DEPEND="dev-perl/Throwable
 	dev-perl/Try-Tiny
 	dev-perl/MooX-HandlesVia
 	perl-gcpan/Types-Path-Tiny
+	perl-gcpan/MooX-ClassAttribute
 	dev-lang/perl"
