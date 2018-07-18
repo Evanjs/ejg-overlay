@@ -29,4 +29,5 @@ DEPEND="dev-perl/Throwable
 	dev-perl/Const-Fast
 	dev-perl/Try-Tiny
 	dev-perl/MooX-HandlesVia
+	perl-gcpan/Types-Path-Tiny
 	dev-lang/perl"
