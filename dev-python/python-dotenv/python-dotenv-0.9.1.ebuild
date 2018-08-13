@@ -4,7 +4,7 @@
 EAPI=6
 
 PYTHON_COMPAT=( python3_{6,7} )
-inherit distutils-r1 python-r1
+inherit distutils-r1
 
 DESCRIPTION="Get and set values in your .env file in local and production servers."
 HOMEPAGE="https://github.com/theskumar/python-dotenv"
@@ -24,8 +24,6 @@ dev-python/sh
 dev-python/wheel
 dev-python/ipython
 dev-python/pypandoc"
-
-#S="${WORKDIR}/${MY_P}"
 
 python_test() {
 	py.test -v
