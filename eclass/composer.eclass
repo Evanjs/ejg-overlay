@@ -1,0 +1,111 @@
+# Copyright 2016,2018 Jan Chren (rindeal)
+# Distributed under the terms of the GNU General Public License v2
+
+# @ECLASS: composer.eclass
+# @MAINTAINER:
+# Jan Chren (rindeal) <dev.rindeal+gentoo@gmail.com>
+# @BLURB: Support eclass for PHP packages using composer
+
+if [ -z "${_COMPOSER_ECLASS}" ] ; then
+
+case "${EAPI:-0}" in
+	6) ;;
+	*) die "Unsupported EAPI='${EAPI}' for '${ECLASS}'" ;;
+esac
+
+inherit rindeal
+
+
+DEPEND="
+	app-misc/jq
+	dev-php/composer
+"
+
+_composer_do_env_dir() {
+	local var="${1}" default="${2}"
+
+	[ -z "${!var}" ] && declare -g "${var}"="${default}"
+	export "${var}"
+	emkdir "${!var}"
+
+	debug-print "${var}='${!var}'"
+}
+
+## If set to 1, this env var will make Composer behave as if you passed
+## the `--no-interaction` flag to every command. This can be set on build boxes/CI.
+export COMPOSER_NO_INTERACTION=1
+
+composer_pkg_setup() {
+	: ${COMPOSER_INSTALL_DIR:="/usr/share/${PF}"}
+
+	_composer_do_env_dir \
+		COMPOSER_HOME "${HOME}"
+
+	_composer_do_env_dir \
+		COMPOSER_CACHE_DIR "${PORTAGE_ACTUAL_DISTDIR:-"${DISTDIR}"}/composer"
+
+	## By setting this var you can make Composer install the dependencies into a directory
+	## other than `vendor`.
+	_composer_do_env_dir \
+		COMPOSER_VENDOR_DIR "${S}/vendor"
+
+	## By setting this option you can change the `bin` (Vendor Binaries) directory
+	## to something other than `vendor/bin`.
+	_composer_do_env_dir \
+		COMPOSER_BIN_DIR "${T}/composer/bin"
+
+	# this dir shouldn't exist for now
+	NO_V=1 erm -rf "${S}"
+}
+
+ecomposer() {
+	local composer=(
+		composer
+
+		--no-interaction
+		-vvv # max verbosity
+	)
+
+	elog "Running: '${composer[*]} ${*}'"
+	"${composer[@]}" "${@}" || die "Composer failed to run"
+}
+
+ecomposer_install() {
+	local options=(
+		--optimize-autoloader
+		--no-dev
+		--prefer-dist
+	)
+
+	ecomposer "${options[@]}" install "${@}"
+}
+
+composer_list_bin() {
+	local code composer_json="composer.json"
+
+	## first check if any bins exist
+	jq -e -r '.bin' "${composer_json}" >/dev/null
+	code=$?
+	[ ${code} -eq 1 ] && return 0
+	[ ${code} -gt 1 ] && die "jq failed to run with exit code '${code}'"
+
+	jq -r '.bin[]' "${composer_json}" || die
+}
+
+composer_copy_install_all() {
+	emkdir "${ED}${COMPOSER_INSTALL_DIR}"
+	NO_V=1 ecp -r "${S}"/* "${ED}${COMPOSER_INSTALL_DIR}"
+}
+
+composer_install_bins() {
+	local bin_list="${T}/composer-bins"
+	composer_list_bin > "${bin_list}"
+
+	while read b ; do
+		fperms a+x "${COMPOSER_INSTALL_DIR}/${b}"
+		dosym "${COMPOSER_INSTALL_DIR}/${b}" "/usr/bin/${b##*/}"
+	done < "${bin_list}"
+}
+
+_COMPOSER_ECLASS=1
+fi
