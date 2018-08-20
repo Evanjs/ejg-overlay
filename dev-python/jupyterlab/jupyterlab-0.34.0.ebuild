@@ -19,8 +19,8 @@ DEPEND="sys-apps/yarn
 >=dev-python/notebook-4.3.1
 dev-python/jupyterlab_launcher
 dev-python/ipython_genutils
-virtual/python-futures[$(python_gen_usedep 'python2*')]
-dev-python/subprocess32[$(python_gen_usedep 'python2*')]"
+virtual/python-futures[$(python_gen_usedep 'python3*')]
+dev-python/subprocess32[$(python_gen_usedep 'python3*')]"
 RDEPEND="${DEPEND}"
 
 src_compile() {
