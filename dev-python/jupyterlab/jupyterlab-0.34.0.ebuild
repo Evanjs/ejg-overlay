@@ -15,13 +15,13 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND="sys-apps/yarn
+DEPEND="sys-apps/yarn"
+RDEPEND="${DEPEND}
 >=dev-python/notebook-4.3.1
 dev-python/jupyterlab_launcher
 dev-python/ipython_genutils
-virtual/python-futures[$(python_gen_usedep 'python3*')]
-dev-python/subprocess32[$(python_gen_usedep 'python3*')]"
-RDEPEND="${DEPEND}"
+$(python_gen_cond_dep 'virtual/python-futures[${PYTHON_USEDEP}]' python3_6 )
+$(python_gen_cond_dep 'dev-python/subprocess32[${PYTHON_USEDEP}]' python3_6 )"
 
 src_compile() {
 	yarn
