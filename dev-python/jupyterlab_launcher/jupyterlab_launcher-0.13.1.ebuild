@@ -8,8 +8,7 @@ inherit distutils-r1
 
 DESCRIPTION="Launch an application built using JupyterLab"
 HOMEPAGE="https://github.com/jupyterlab/jupyterlab_launcher"
-SRC_URI="https://github.com/jupyterlab/jupyterlab_launcher/archive/v${PV}.tar.gz"
-
+SRC_URI="https://codeload.github.com/jupyterlab/jupyterlab_launcher/tar.gz/v${PV} -> ${P}.tar.gz"
 LICENSE="EULA"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
